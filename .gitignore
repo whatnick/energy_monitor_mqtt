@@ -1,0 +1,8 @@
+# IDE files
+.vscode/
+
+# VirtualEnv
+venv/
+
+# Private settings
+.env
