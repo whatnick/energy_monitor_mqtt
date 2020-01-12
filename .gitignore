@@ -4,5 +4,8 @@
 # VirtualEnv
 venv/
 
+# Python dev files
+__pycache__/
+
 # Private settings
 .env
