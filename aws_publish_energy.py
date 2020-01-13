@@ -42,11 +42,11 @@ def ssl_alpn():
 if __name__ == '__main__':
     topic = "test/date"
     try:
-        mqttc = mqtt.Client()
+        mqttc = mqtt.Client(transport="tcp")
         ssl_context= ssl_alpn()
         mqttc.tls_set_context(context=ssl_context)
         logger.info("start connect")
-        mqttc.connect(aws_iot_endpoint, port=443)
+        mqttc.connect(aws_iot_endpoint, port=8883)
         logger.info("connect success")
         mqttc.loop_start()
 
