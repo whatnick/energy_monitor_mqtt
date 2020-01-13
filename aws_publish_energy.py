@@ -40,20 +40,21 @@ def ssl_alpn():
         raise e
 
 if __name__ == '__main__':
-    topic = "test/date"
+    topic = "$aws/things/OpenWRT-Emon/shadow/update"
     try:
         mqttc = mqtt.Client(transport="tcp")
         ssl_context= ssl_alpn()
         mqttc.tls_set_context(context=ssl_context)
         logger.info("start connect")
-        mqttc.connect(aws_iot_endpoint, port=8883)
+        mqttc.connect(aws_iot_endpoint, port=443)
         logger.info("connect success")
         mqttc.loop_start()
 
         while True:
             now = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
             logger.info("try to publish:{}".format(now))
-            mqttc.publish(topic, now)
+            msg = '{"state": {"reported": {"VA": 240, "VB":241, "VC":239 }}}'
+            mqttc.publish(topic, msg)
             time.sleep(1)
 
     except Exception as e:
